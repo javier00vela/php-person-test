@@ -6,6 +6,7 @@ class Autoloader
 {
 
     private static $path = [
+        "interfaces",
         "models",
         "config",
         "core"
