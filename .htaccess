@@ -1,0 +1,6 @@
+Options All -Indexes
+RewriteEngine On
+RewriteRule ^([-a-zA-Z0-9]+)/([-a-zA-Z0-9]+)$ index.php?controller=$1&action=$2 [QSA,L]
+RewriteRule ^([-a-zA-Z0-9]+)/([-a-zA-Z0-9]+)/([-a-zA-Z0-9]+)$ index.php?controller=$1&action=$2&_key=$3 [QSA,L]
+php_flag log_errors on 
+php_value error_log "log/error.log"
