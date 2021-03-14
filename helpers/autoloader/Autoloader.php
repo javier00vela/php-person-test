@@ -9,7 +9,8 @@ class Autoloader
         "interfaces",
         "models",
         "config",
-        "core"
+        "core",
+        "helpers"
     ];
 
     private static $dependenciesPath = "vendor/autoload.php";

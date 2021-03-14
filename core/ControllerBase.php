@@ -20,7 +20,7 @@ class ControllerBase
         foreach ($data as $key => $value) {
             $this->smarty->assign($key,$value);
         }
- 
+        
         return $this->smarty->display("{$view}.tpl");
     }
 
@@ -28,6 +28,7 @@ class ControllerBase
         $this->smarty->setTemplateDir("views/");
         $this->smarty->setCompileDir('cache/templates_c');
         $this->smarty->setCacheDir('cache/');
+        $this->smarty->assign("URL",DIR_URL);
     }
 
     private function getInstanceSmarty(){

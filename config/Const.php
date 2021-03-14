@@ -14,4 +14,16 @@ if(!defined('DB_PASSWORD')){
     define('DB_PASSWORD',"");
 }
 
+
+/* General Const */
+
+if(!defined('NAME_PROJECT')){
+    define('NAME_PROJECT',"php-person-test");
+}
+
+
+if(!defined('DIR_URL')){
+    define('DIR_URL',"http://localhost/".NAME_PROJECT);
+}
+
 ?>
