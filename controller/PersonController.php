@@ -22,15 +22,22 @@ class PersonController extends \core\ControllerBase
 
     public function panel()
     {
+        $listPerson = [];
         if (Http::method(POST)) {
-            $listPerson = $this->entityManager->entity($this->person)->wheteOr([
+            $listPersonDb = $this->entityManager->entity($this->person)->wheteOr([
                 "email" => $_POST["_param"],
                 "first_name" => $_POST["_param"],
                 "last_name" => $_POST["_param"]
             ])->get();
+
+            $listPersonExt = \helpers\customer\CustomerData::requestData("persons_filter", $_POST["_param"]);
+            $listPerson = $listPersonDb + $listPersonExt;
         }
         if (Http::method(GET)) {
-            $listPerson = $this->entityManager->entity($this->person)->findAll()->get();
+             $listPersonDb = $this->entityManager->entity($this->person)->findAll()->get();
+             $listPersonExt = \helpers\customer\CustomerData::requestData("persons");
+             $listPerson = $listPersonDb + $listPersonExt;
+     
         }
         $this->view("panel", [
             "listPerson" =>  $listPerson
