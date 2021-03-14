@@ -1,0 +1,16 @@
+{
+    "name": "php-person-test/javiervela",
+    "description": "Aplicaci\u0000n de personas desarrollada en php 7.4 gestora de personas via DB & REST-API",
+    "license": "ISC",
+    "authors": [
+        {
+            "name": "javier",
+            "email": "javier00vela@gmail.com"
+        }
+    ],
+    "require": {
+        "smarty/smarty": "^3.1",
+        "nette/database": "^3.1",
+        "phpunit/phpunit": "^8.5"
+    }
+}
