@@ -10,7 +10,7 @@ class CustomerData
     public static  function requestData(string $requestName, string|array $parameters = null)
     {
         switch ($requestName) {
-            case "cities":
+            case "countries":
                 return  CustomerData::getListCities();
             case "persons":
                 return  CustomerData::getListPerson();
@@ -46,6 +46,18 @@ class CustomerData
             }
         }
         return $responseError;
+    }
+
+    public static function getPersonByMail(string $mail)
+    {
+        $listFilterPerson = null;
+        $array = CustomerData::getListPerson();
+        foreach ($array as $key => $value) {
+            if ($mail == $value->email) {
+                $listFilterPerson = $value;
+            }
+        }
+        return  $listFilterPerson;
     }
 
     private static function getFilterPerson(string $valueParama)

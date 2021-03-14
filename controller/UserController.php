@@ -77,7 +77,7 @@ class UserController extends \core\ControllerBase
             }
         }
         $this->view("register", [
-            "countries" => \helpers\customer\CustomerData::requestData("cities"),
+            "countries" => \helpers\customer\CustomerData::requestData("countries"),
             "errorsRegister" => $this->personValidator->validateFields($_POST, new Person())->getErrors(),
             "sended" =>  $send
         ]);

@@ -11,6 +11,6 @@
     "require": {
         "smarty/smarty": "^3.1",
         "nette/database": "^3.1",
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^8.5"
     }
 }
