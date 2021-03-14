@@ -7,9 +7,9 @@ class Autoloader
 
     private static $path = [
         "interfaces",
+        "core",
         "models",
         "config",
-        "core",
         "helpers"
     ];
 

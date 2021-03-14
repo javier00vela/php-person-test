@@ -26,4 +26,15 @@ if(!defined('DIR_URL')){
     define('DIR_URL',"http://localhost/".NAME_PROJECT);
 }
 
+
+/* HTTP Const */
+
+if(!defined('GET')){
+    define('GET',"GET");
+}
+
+if(!defined('POST')){
+    define('POST',"POST");
+}
+
 ?>

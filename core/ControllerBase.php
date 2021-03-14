@@ -24,6 +24,11 @@ class ControllerBase
         return $this->smarty->display("{$view}.tpl");
     }
 
+    protected function redirect(string $route)
+    {
+       header("Location: ".DIR_URL."{$route}");
+    }
+
     private function getConfigSmarty(){
         $this->smarty->setTemplateDir("views/");
         $this->smarty->setCompileDir('cache/templates_c');
