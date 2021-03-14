@@ -4,7 +4,7 @@ class Person
 {
     public $table = "person";
     public $field = [
-        ["name" => "firt_name" ,"alias" => "Nombres" , "required" => true, "min" => 3 , "unique" => false , "is_mail" => false],
+        ["name" => "first_name" ,"alias" => "Nombres" , "required" => true, "min" => 3 , "unique" => false , "is_mail" => false],
         ["name" => "last_name" ,"alias" => "Apellidos" , "required" => true, "min" => 3 , "unique" => false , "is_mail" => false],
         ["name" => "email" ,"alias" => "Correo" , "required" => true, "min" => 3 , "unique" => true , "is_mail" => true],
         ["name" => "document" ,"alias" => "Documento" , "required" => true, "min" => 3 , "unique" => false , "is_mail" => false],

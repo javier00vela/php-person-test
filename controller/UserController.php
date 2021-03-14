@@ -1,13 +1,13 @@
 <?php
-
-
+namespace controller;
 use core\EntityManager;
 use helpers\http\Http;
 use models\user\UserValidator;
 use models\person\PersonValidator;
 use models\user\User;
 use models\person\Person;
-
+use helpers\customer\CustomerData;
+use helpers\session\Session;
 class UserController extends \core\ControllerBase
 {
 
@@ -27,24 +27,10 @@ class UserController extends \core\ControllerBase
         $this->personValidator = new PersonValidator($this->entityManager->entity($this->person));
     }
 
-
-    public function logout()
-    {
-        $_SESSION = [];
-        $this->redirect("/user/login");
-    }
-
-
     public function login()
     {
         if (Http::method(POST)) {
-            $entityUserFields = $this->userValidator->mapperEntity($_POST, null);
-            if ($this->entityManager->entity($this->user)->exist($entityUserFields) == 1) {
-                $_SESSION["userAuth"] = ["Auth" => true];
-                $this->redirect("/person/panel");
-            } else {
-                $this->userValidator->errors[] = ["message" => "El usuario agregado no existe"];
-            }
+            $this->loginPostValidation();
         }
         $this->view("login", [
             "errorsLogin" => $this->userValidator->validateFields($_POST, new User())->getErrors()
@@ -53,34 +39,59 @@ class UserController extends \core\ControllerBase
 
     public function register()
     {
-        $send = false;
+        $sendBefore = false;
         if (Http::method(POST)) {
-            $send = true;
-            $emailValidateExt =  \helpers\customer\CustomerData::requestData("persons_exist", $_POST["email"]);
-            $documentValidateExt =  \helpers\customer\CustomerData::requestData("persons_exist", $_POST["document"]);
-            if (count($emailValidateExt) > 0) {
-                $this->personValidator->errors[] = $emailValidateExt;
+            $this->registerPostValidation();
+            $sendBefore = true;
+        }
+        $this->view("register", [
+            "countries" => CustomerData::requestData("countries"),
+            "errorsRegister" => $this->personValidator->validateFields($_POST, $this->person)->getErrors(),
+            "sended" =>  $sendBefore
+        ]);
+    }
+
+    public function logout()
+    {
+        Session::logout();
+        $this->redirect(LOGIN_PATH);
+    }
+
+
+    private function loginPostValidation()
+    {
+
+        $entityUserFields = $this->userValidator->mapperEntity($_POST, null);
+        if ($this->entityManager->entity($this->user)->exist($entityUserFields) == 1) {
+            Session::add("userAuth", ["Auth" => true]);
+            if(isset($_SESSION["userAuth"])){
+                $this->redirect(PANEL_PATH);
             }
+        } else {
+            $this->userValidator->addError("No se han encontrado usuarios con los datos agregados.");
+        }
+    }
 
-            if (count($documentValidateExt) > 0) {
-                $this->personValidator->errors[] = $documentValidateExt;
-            }
+    private function registerPostValidation()
+    {
+        $emailValidateExt =  CustomerData::requestData(EXIST_PERSON_REQUEST, $_POST["email"]);
+        if (count($emailValidateExt) > 0) {
+            $this->userValidator->addError($emailValidateExt);
+        }
+        
+        $documentValidateExt =  CustomerData::requestData(EXIST_PERSON_REQUEST, $_POST["document"]);
+        if (count($documentValidateExt) > 0) {
+            $this->userValidator->addError($documentValidateExt);
+        }
 
-
-            if (count($this->personValidator->getErrors()) == 0) {
-                if (count($this->userValidator->validateFields($_POST, new User())->getErrors()) == 0) {
-                    $personId  = $this->savePerson();
-                    if (!empty($this->saveUser($personId))) {
-                        $this->redirect("/user/login");
-                    }
+        if (count($this->personValidator->getErrors()) == 0) {
+            if (count($this->userValidator->validateFields($_POST, $this->person)->getErrors()) == 0) {
+                $personId  = $this->savePerson();
+                if (!empty($this->saveUser($personId))) {
+                    $this->redirect(LOGIN_PATH);
                 }
             }
         }
-        $this->view("register", [
-            "countries" => \helpers\customer\CustomerData::requestData("countries"),
-            "errorsRegister" => $this->personValidator->validateFields($_POST, new Person())->getErrors(),
-            "sended" =>  $send
-        ]);
     }
 
     private function savePerson()
@@ -88,7 +99,6 @@ class UserController extends \core\ControllerBase
         $entityPersonFields = $this->personValidator->mapperEntity($_POST);
         return $this->entityManager->entity($this->person)->save($entityPersonFields);
     }
-
 
     private function saveUser(int $personId)
     {

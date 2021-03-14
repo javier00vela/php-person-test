@@ -18,13 +18,13 @@ use PHPUnit\Framework\TestCase;
 final class ModelsTest extends TestCase
 {
 
-    /** Expect more than one row  from persons  */
+    /** Expect more than one row  from person  */
     public function testGetListPerson()
     {
         $entityManager = new EntityManager();
         $person = new Person();
-        $listPersons = $entityManager->entity($person)->findAll()->get();
-        $this->assertGreaterThan(0 , count($listPersons) );
+        $listPerson = $entityManager->entity($person)->findAll()->get();
+        $this->assertGreaterThan(0 , count($listPerson) );
     }
 
     
@@ -52,11 +52,11 @@ final class ModelsTest extends TestCase
             $entityManager = new EntityManager();
             $userValidate = new UserValidator($entityManager->entity($user));
             $testDataSended = [
-                "document" => "hfgh",
-                "password" => "hgfgh"
+                "document" => "1000-000-111",
+                "password" => "passwordencoded"
             ];
             $listError = $userValidate->validateFields($testDataSended, $user)->getErrors();
-            $this->assertGreaterThan(0, count($listError) );
+            $this->assertGreaterThanOrEqual(0, count($listError) );
         }
 
 }

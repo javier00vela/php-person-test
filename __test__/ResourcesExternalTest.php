@@ -24,7 +24,7 @@ final class ResourcesExternalTest extends TestCase
     {
         $listKeysGeneral = ["id","job_title","email","first_name","last_name","document","phone_number","country","state","city"];
         $listKeysGeneralReceived = [];
-        $oneObjectPerson = CustomerData::requestData("persons")[0];
+        $oneObjectPerson = CustomerData::requestData(LIST_PERSON_REQUEST)[0];
         foreach ($oneObjectPerson as $key => $value) {
             $listKeysGeneralReceived[] = $key;
         }
@@ -34,7 +34,7 @@ final class ResourcesExternalTest extends TestCase
      /** Response almost one row */
      public function testNumberPersonData()
      {
-         $oneObjectPerson = CustomerData::requestData("persons");
+         $oneObjectPerson = CustomerData::requestData(LIST_PERSON_REQUEST);
          $this->assertGreaterThan(0 , count($oneObjectPerson) );
      }
 
@@ -44,7 +44,7 @@ final class ResourcesExternalTest extends TestCase
     {
         $listKeysGeneral = ["name","code"];
         $listKeysGeneralReceived = [];
-        $oneObjectCountries = CustomerData::requestData("countries")[0];
+        $oneObjectCountries = CustomerData::requestData(COUNTRIES_REQUEST)[0];
         foreach ($oneObjectCountries as $key => $value) {
             $listKeysGeneralReceived[] = $key;
         }
@@ -54,7 +54,7 @@ final class ResourcesExternalTest extends TestCase
      /** Response almost one row */
      public function testNumberCountryData()
      {
-         $oneObjectCountries = CustomerData::requestData("countries");
+         $oneObjectCountries = CustomerData::requestData(COUNTRIES_REQUEST);
          $this->assertGreaterThan(0 , count($oneObjectCountries) );
      }
 

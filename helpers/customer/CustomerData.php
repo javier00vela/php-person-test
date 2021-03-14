@@ -10,13 +10,13 @@ class CustomerData
     public static  function requestData(string $requestName, string|array $parameters = null)
     {
         switch ($requestName) {
-            case "countries":
+            case COUNTRIES_REQUEST:
                 return  CustomerData::getListCities();
-            case "persons":
+            case LIST_PERSON_REQUEST:
                 return  CustomerData::getListPerson();
-            case "persons_filter":
+            case FILTER_PERSON_REQUEST:
                 return  CustomerData::getFilterPerson($parameters);
-            case "persons_exist":
+            case EXIST_PERSON_REQUEST:
                 return  CustomerData::getExistPerson($parameters);
             default:
                 return [];
@@ -25,12 +25,12 @@ class CustomerData
 
     private static function getListCities()
     {
-        return Curl::sendGet(DIR_URL . "/src/json/countries.json");
+        return Curl::sendGet(COUNTRIES_LIST_EXTERNAL);
     }
 
     private static function getListPerson()
     {
-        return Curl::sendGet("http://www.mocky.io/v2/5d9f39263000005d005246ae")->objects;
+        return Curl::sendGet(PERSON_LIST_EXTERNAL)->objects;
     }
 
     private static function getExistPerson(string $valueParama)

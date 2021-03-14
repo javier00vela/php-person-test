@@ -3,8 +3,8 @@
 namespace models\person;
 
 use \core\EntityManager;
-
-class PersonValidator extends \core\ValidatorManager
+use \core\ValidatorManager;
+class PersonValidator extends ValidatorManager
 {
 
     public function __construct(EntityManager $entityManager){
@@ -15,7 +15,6 @@ class PersonValidator extends \core\ValidatorManager
     {
         return parent::validateFieldEntity($formHttp , (array)$entity->field);
     }
-
 
     public function mapperEntity(array $dataPost){
         return [

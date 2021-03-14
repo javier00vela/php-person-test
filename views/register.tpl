@@ -14,12 +14,12 @@
         {/if}
 
         <div class="form-group">
-            <p>Nombre</p>
+            <p>Nombres</p>
             <input type="text" class="form-control" name="first_name" placeholder="Nombre">
         </div>
 
         <div class="form-group">
-            <p>Apellido</p>
+            <p>Apellidos</p>
             <input type="text" class="form-control" name="last_name" placeholder="Apellido">
         </div>
 

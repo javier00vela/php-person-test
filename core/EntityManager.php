@@ -1,13 +1,11 @@
 <?php
-
 namespace core;
-
-class EntityManager  extends \core\ConnectionDB
+use \core\ConnectionDB;
+class EntityManager  extends ConnectionDB
 {
 	private $cnx = null;
     private $entity;
     private $result = null;
-	private static $instance;
 
 	public function __construct()
 	{
@@ -19,7 +17,6 @@ class EntityManager  extends \core\ConnectionDB
 		return $this;
 	}
 
-	
 	public function findAll(){
 		$this->result = $this->cnx->fetchAll("SELECT * FROM {$this->entity->table}");
 		return $this;
@@ -29,9 +26,6 @@ class EntityManager  extends \core\ConnectionDB
 		$this->result = $this->cnx->fetchAll("SELECT * FROM {$this->entity->table} where ?or" , $arrayPost);
 		return $this;
 	}
-
-
-	
 
 	public function save(array $field){
 		$this->cnx->query("INSERT INTO  {$this->entity->table} ?", $field);
@@ -49,6 +43,4 @@ class EntityManager  extends \core\ConnectionDB
 	}
 
 }
-
-
 ?>

@@ -1,8 +1,7 @@
 <?php
-
 namespace models\user;
-
-class UserValidator extends \core\ValidatorManager
+use  \core\ValidatorManager;
+class UserValidator extends ValidatorManager
 {
 
     public  function validateFields( $formHttp,  $entity)
@@ -16,10 +15,10 @@ class UserValidator extends \core\ValidatorManager
     public function mapperEntity(array $dataPost , int|null $personId){
         return ($personId == null ) ?[
             "document" => $dataPost["document"],
-            "password" => $dataPost["password"]
+            "password" =>  md5($dataPost["password"])
             ] :[
             "document" => $dataPost["document"],
-            "password" => $dataPost["password"],
+            "password" => md5($dataPost["password"]),
             "person_id" => $personId,
         ];
     }

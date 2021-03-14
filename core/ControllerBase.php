@@ -3,6 +3,7 @@
 namespace Core;
 
 use Smarty;
+use \helpers\autoloader\Autoloader;
 
 class ControllerBase
 {
@@ -16,7 +17,7 @@ class ControllerBase
     public function __construct($class)
     {
         $this->class = $class;
-        \helpers\autoloader\Autoloader::initSession();
+        Autoloader::initSession();
         $this->middlewareSession();
         $this->getInstanceSmarty();
         $this->getConfigSmarty();
@@ -35,8 +36,12 @@ class ControllerBase
     private function middlewareSession()
     {
         foreach ($this->routesAuth as  $value) {
-            if (empty($_SESSION["userAuth"]) && $this->class == "{$value}Controller") {
-                $this->redirect("/user/login");
+            if (empty($_SESSION["userAuth"]) && $this->class == "controller\{$value}Controller") {
+                $this->redirect(LOGIN_PATH);
+            }
+
+            if (!empty($_SESSION["userAuth"]) && $this->class == "controller\UserController") {
+                $this->redirect(PANEL_PATH);
             }
         }
     }
