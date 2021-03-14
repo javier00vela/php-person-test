@@ -25,6 +25,25 @@ class EntityManager  extends \core\ConnectionDB
 		return $this;
 	}
 
+	public function wheteOr(array $arrayPost){
+		$this->result = $this->cnx->fetchAll("SELECT * FROM {$this->entity->table} where ?or" , $arrayPost);
+		return $this;
+	}
+
+
+	
+
+	public function save(array $field){
+		$this->cnx->query("INSERT INTO  {$this->entity->table} ?", $field);
+		return $this->cnx->getInsertId();
+	}
+
+	public function exist(array $field){
+		$this->result = $this->cnx->fetch("SELECT count(*) as cant FROM {$this->entity->table} WHERE", $field);
+		return ($this->get()->cant > 0) ? 1 : 0 ;
+	}
+
+
 	public function get(){
 		return $this->result;
 	}

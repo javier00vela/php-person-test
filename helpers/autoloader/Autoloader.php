@@ -31,6 +31,13 @@ class Autoloader
         }
     }
 
+    public static function initSession()
+    {
+        if (!session_start()) {
+            session_start();
+        }
+    }
+
     private static function loaderFilesDir()
     {
         $isSubpath = false;

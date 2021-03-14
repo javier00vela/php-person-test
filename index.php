@@ -6,5 +6,4 @@ require_once __dir__."/helpers/autoloader/Autoloader.php";
 
 
 Autoloader::initialization();
-
 ?>

@@ -1,0 +1,96 @@
+
+header{
+    color:white;
+    background: #009879;
+    padding:25px;
+}
+
+.container{
+    margin: 100px;
+}
+
+.alert{
+    box-shadow: 3px 4px 7px 1px #c1b9b9;
+    margin:10px;
+}
+
+.alert ul , li , h3{
+    padding:10px;
+}
+
+.alert-danger{
+    background:#fa2222;
+    color: white;
+}
+
+.form-control{
+    width: 97.5%;
+    padding:10px;
+    margin: 10px;
+    border-radius: 10px;
+    border : 1px solid #b19e9e;
+}
+
+.btn {
+    width : 99%;
+    border-radius: 10px;
+    padding:10px;
+    margin: 10px;
+    background : #aaa6a6;
+    color:white;
+    border : 1px solid #b19e9e;
+}
+
+.btn:hover {
+    background : #51af9c !important;
+    color:white;
+}
+
+ .btn-success{
+    background : #009879 !important;
+}
+
+
+.table{
+    width : 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+
+.table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+.table th,
+.table td {
+    padding: 12px 15px;
+}
+
+.table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+.text-center{
+    text-align: center;
+}
+

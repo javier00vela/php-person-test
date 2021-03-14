@@ -13,4 +13,16 @@ class UserValidator extends \core\ValidatorManager
         return $this;
     }
 
+    public function mapperEntity(array $dataPost , int|null $personId){
+        return ($personId == null ) ?[
+            "document" => $dataPost["document"],
+            "password" => $dataPost["password"]
+            ] :[
+            "document" => $dataPost["document"],
+            "password" => $dataPost["password"],
+            "person_id" => $personId,
+        ];
+    }
+
 }
+
